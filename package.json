@@ -1,0 +1,23 @@
+{
+  "name": "system-monitor",
+  "version": "1.0.0",
+  "description": "Symple monitoring system",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "Ali Pirpiran",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "git": "^0.1.5",
+    "node-cron": "^2.0.3",
+    "nodemon": "^2.0.20",
+    "socket.io": "^2.3.0",
+    "systeminformation": "^4.24.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}

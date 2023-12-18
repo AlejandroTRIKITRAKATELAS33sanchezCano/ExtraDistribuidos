@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extraordinario</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on("info", (data) => {
+        let div = document.getElementById("data");
+        for (const key of Object.keys(data)) {
+          div.innerHTML += `<h2 class='text-2xl mt-5'>${key.toUpperCase()}</h2>`;
+          div.innerHTML += `<ul>`;
+          for (const [key2, val] of Object.entries(data[key])) {
+            div.innerHTML += `<li>${key2}: ${val}</li>`;
+          }
+          div.innerHTML += `</ul>`;
+        }
+      });
+    </script>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-zinc-700">
+    <h1 class="text-center text-3xl text-white">
+      Checa La Información De Tu PC Aquí:
+    </h1>
+    <div class="flex justify-center w-fit m-auto">
+      <img src="https://res.cloudinary.com/dbb56iwkk/image/upload/v1702883809/computer-svgrepo-com_mvknp3.svg" class="m-auto w-96 h-fit"/>
+      <div
+        id="data"
+        class="p-8 rounded-xl text-center w-fit m-auto text-white"
+      ></div>
+    </div>
+  </body>
+</html>
