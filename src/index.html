@@ -9,29 +9,98 @@
       var socket = io();
       socket.on("info", (data) => {
         let div = document.getElementById("data");
+        div.innerHTML = ""; // Limpiar contenido anterior
         for (const key of Object.keys(data)) {
-          div.innerHTML += `<h2 class='text-2xl mt-5'>${key.toUpperCase()}</h2>`;
-          div.innerHTML += `<ul>`;
-          for (const [key2, val] of Object.entries(data[key])) {
-            div.innerHTML += `<li>${key2}: ${val}</li>`;
-          }
-          div.innerHTML += `</ul>`;
+          div.innerHTML += `<div class='mb-8'>
+                              <h2 class='text-2xl mb-3 font-semibold text-blue-500'>${key.toUpperCase()}</h2>
+                              <ul class='list-disc pl-5 text-gray-800'>
+                                ${Object.entries(data[key]).map(
+                                  ([key2, val]) =>
+                                    `<li class='mb-1'>${key2}: ${val}</li>`
+                                ).join('')}
+                              </ul>
+                            </div>`;
         }
       });
     </script>
-    <link rel="stylesheet" href="./index.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
   </head>
-  <body class="bg-zinc-700">
-    <h1 class="text-center text-3xl text-white">
-      Checa La Información De Tu PC Aquí:
-    </h1>
-    <div class="flex justify-center w-fit m-auto">
-      <img src="https://res.cloudinary.com/dbb56iwkk/image/upload/v1702883809/computer-svgrepo-com_mvknp3.svg" class="m-auto w-96 h-fit"/>
-      <div
-        id="data"
-        class="p-8 rounded-xl text-center w-fit m-auto text-white"
-      ></div>
+  <body class="bg-gradient-to-r from-zinc-700 to-zinc-800 min-h-screen flex flex-col items-center justify-center animate-fade-in relative">
+    <style>
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      body {
+        animation: gradient-animation 10s infinite linear;
+      }
+
+      .img-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        margin: 1rem;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .img-container:hover {
+        transform: translate(20px, -20px);
+      }
+    </style>
+
+    <header class="text-center text-black mb-12">
+      <h1 class="text-4xl font-bold mb-2">¡Checa La Información De Tu PC!</h1>
+      <p class="text-lg">Datos actualizados en tiempo real</p>
+    </header>
+
+    <div class="mb-12">
+      <img
+        src="https://res.cloudinary.com/dbb56iwkk/image/upload/v1702883809/computer-svgrepo-com_mvknp3.svg"
+        alt="Computer Icon"
+        class="w-64 h-auto mb-8"
+      />
     </div>
+
+    <div id="data" class="p-8 bg-white rounded-xl text-left shadow-md z-10 relative">
+      <!-- Data will be injected here dynamically -->
+    </div>
+
+    <div class="img-container">
+      <img
+        src="https://res.cloudinary.com/dbb56iwkk/image/upload/v1702886094/fe8381b0-9abd-40b5-9a2c-9a9c84eda7a8_fwumdf.jpg"
+        alt="Hidden Image"
+        class="w-16 h-auto"
+      />
+    </div>
+
+    <footer class="text-center text-gray-500 mt-auto py-4">
+      <p>&copy; 2023 Extraordinario. Todos los derechos reservados.</p>
+    </footer>
+
+    <style>
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .animate-fade-in {
+        animation: fade-in 2s ease-out;
+      }
+    </style>
   </body>
 </html>
