@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script>
+
+        var socket = io();
+        socket.on("info", (data) => {
+            let div = document.getElementById("data");
+            div.innerHTML = ""; // Limpiar contenido anterior
+            for (const key of Object.keys(data)) {
+                div.innerHTML += `<div class='mb-8'>
+                                <h2 class='text-2xl mb-3 font-semibold text-blue-500'>${key.toUpperCase()}</h2>
+                                <ul class='list-disc pl-5 text-gray-800'>
+                                ${Object.entries(data[key]).map(
+                    ([key2, val]) =>
+                        `<li class='mb-1'>${key2}: ${val}</li>`
+                ).join('')}
+                                </ul>
+                                </div>`;
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Hola</h1>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ exports.startTask = () => {
     });
 };
 
-exports.distroyTask = () => {
+exports.destroyTask = () => {
     if (task) {
         task.destroy();
         task = null;
